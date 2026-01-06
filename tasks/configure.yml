@@ -98,7 +98,6 @@
 - name: Test PowerDNS Recursor configuration
   when: not ansible_check_mode
   become: true
-  become_user: "{{ default_pdns_rec_user }}"
   ansible.builtin.command:
     cmd: "/usr/sbin/pdns_recursor --config=check"
   changed_when: false

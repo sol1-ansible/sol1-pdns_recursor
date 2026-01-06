@@ -64,7 +64,6 @@ _pdns_rec_version: "{{ pdns_rec_package_version if pdns_rec_package_version != '
 # Determine if we have base lua or dns script config to add to the base config
 _pdns_rec_base_lua_cfg: "{{ pdns_rec_config_lua_file_content | default('', true) | length > 0 }}"
 _pdns_rec_base_dns_script: "{{ pdns_rec_config_dns_script_file_content | default('', true) | length > 0 }}"
-
 # Combine the base recursor config options
 _pdns_rec_base_config: >-
   {{
@@ -78,7 +77,7 @@ _pdns_rec_base_config: >-
   }}
 
 pdns_rec_base_config:
-  recursor: "(( _pdns_rec_base_config }}"
+  recursor: "{{ _pdns_rec_base_config }}"
 
 
 pdns_rec_template_config: "{{ pdns_rec_base_config | ansible.builtin.combine(pdns_rec_custom_config, recursive=true) }}"
